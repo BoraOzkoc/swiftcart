@@ -36,7 +36,7 @@ export default function ProductCard({
   };
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 w-52 shadow-sm">
+    <div className="border border-gray-300 bg-light rounded-lg p-4 w-52 shadow-sm">
       <div className="relative w-full h-36 mb-3">
         <Image
           src={product.imageUrl}

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
-import CardSummary from "@/components/CartSummary";
+import CartSummary from "../components/CartSummary";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -55,26 +55,30 @@ export default function Home() {
   if (loading) return <p>Loading products...</p>;
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">SwiftCart</h1>
-      <div className="flex flex-wrap gap-6">
-        {products.map((p) => {
-          const cartItem = cart.find((item) => item.product.id === p.id);
-          const quantity = cartItem?.quantity || 0;
+    <main className="p-6 bg-blue-50 min-h-screen">
+      <div className="flex justify-center items-center flex-col">
+        <h1 className="text-2xl font-bold mb-4 text-[var(--foreground)]">
+          SwiftCart
+        </h1>
+        <div className="flex flex-wrap gap-6">
+          {products.map((p) => {
+            const cartItem = cart.find((item) => item.product.id === p.id);
+            const quantity = cartItem?.quantity || 0;
 
-          return (
-            <ProductCard
-              key={p.id}
-              product={p}
-              quantity={quantity}
-              isInCart={quantity > 0}
-              onAddToCart={handleAddToCart}
-              onRemoveFromCart={handleRemoveFromCart}
-            />
-          );
-        })}
+            return (
+              <ProductCard
+                key={p.id}
+                product={p}
+                quantity={quantity}
+                isInCart={quantity > 0}
+                onAddToCart={handleAddToCart}
+                onRemoveFromCart={handleRemoveFromCart}
+              />
+            );
+          })}
+        </div>
+        <CartSummary cart={cart} />{" "}
       </div>
-      <CardSummary cart={cart} />
     </main>
   );
 }
